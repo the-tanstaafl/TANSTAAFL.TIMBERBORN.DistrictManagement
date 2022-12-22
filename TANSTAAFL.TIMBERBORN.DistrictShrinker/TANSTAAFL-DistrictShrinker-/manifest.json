@@ -1,0 +1,10 @@
+﻿{
+  "name": "DistrictShrinker",
+  "author": "TANSTAAFL",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/the-tanstaafl/TANSTAAFL.TIMBERBORN.DistrictShrinker",
+  "description": "Reduces the District range after each drought",
+  "dependencies": [
+    "Timberborn_Central-TimberAPI-0.5.0"
+  ]
+}

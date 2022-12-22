@@ -8,7 +8,7 @@ There are five values to alter, listed below:
 
 * StartingRange: Initial district range (Default 75. Base game 70)
 * ReductionAmount: By how much the distric will shrink each cycle (Default 1)
-* CyclesPerReduction: After how many cycle the range will shrink (Default 1)
+* CyclesPerReduction: After how many cycles the range will shrink (Default 1)
 * MinimumRange: The lowest range possible (Default 35)
 * MaximumRange: The highest range possible (Default 125)
 
@@ -25,5 +25,5 @@ PRs are always welcome on the github page!
 
 # Changelog
 
-## v1.0.0 - 9.12.2022
+## v1.0.0 - 22.12.2022
 - Initial release

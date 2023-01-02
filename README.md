@@ -4,13 +4,13 @@ DistrictManagement is a Timberborn mod to alter District configurations.
 
 # Usage
 
-There values to alter are listed below:
+The values to alter are listed below:
 
 * BeaverArmsLength: how far up beavers can build (Default 1)
 * District
 	* Range: The max distance of the roads of a district (Default 70)
 	* Pathfinding: The max distance of pathfinding on roads (Default 55)
-	* Resource: The max distance of resource gathering and planting (Farmhouse, Forestes, etc) over terrain (Default 20)
+	* Resource: The max distance of resource gathering and planting (Farmhouse, Forester, etc) over terrain (Default 20)
 	* Terrain: The max distance of pathfinding for builders on terrain (Default 10)
 * RangeModifier
 	* Enabled: If modifications to the district range are enabled after each drought (Default false)

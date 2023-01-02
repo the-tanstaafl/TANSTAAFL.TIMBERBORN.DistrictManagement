@@ -10,10 +10,10 @@ using Timberborn.Growing;
 using Timberborn.IrrigationSystem;
 using Timberborn.TemplateSystem;
 
-namespace TANSTAAFL.TIMBERBORN.DistrictShrinker
+namespace TANSTAAFL.TIMBERBORN.DistrictManagement
 {
     [Configurator(SceneEntrypoint.InGame)]
-    public class DistrictShrinkerConfigurator : IConfigurator
+    public class DistrictManagementConfigurator : IConfigurator
     {
         public void Configure(IContainerDefinition containerDefinition)
         {

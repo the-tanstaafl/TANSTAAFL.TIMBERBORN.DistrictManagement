@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TANSTAAFL.TIMBERBORN.DistrictShrinker", "TANSTAAFL.TIMBERBORN.DistrictShrinker\TANSTAAFL.TIMBERBORN.DistrictShrinker.csproj", "{F8246B92-E246-42F1-BABC-1A058C1C3768}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TANSTAAFL.TIMBERBORN.DistrictManagement", "TANSTAAFL.TIMBERBORN.DistrictManagement\TANSTAAFL.TIMBERBORN.DistrictManagement.csproj", "{F8246B92-E246-42F1-BABC-1A058C1C3768}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{7E569B53-5F18-473E-82CA-61074F903547}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,7 +4,7 @@ using Timberborn.SingletonSystem;
 using Timberborn.SoilMoistureSystem;
 using Timberborn.WeatherSystem;
 
-namespace TANSTAAFL.TIMBERBORN.DistrictShrinker
+namespace TANSTAAFL.TIMBERBORN.DistrictManagement
 {
     public class DroughtListener : ILoadableSingleton
     {
@@ -25,7 +25,7 @@ namespace TANSTAAFL.TIMBERBORN.DistrictShrinker
         public void OnDroughtEnded(DroughtEndedEvent droughtEndedEvent)
         {
             var instance = TimberApi.DependencyContainerSystem.DependencyContainer.GetInstance<NavigationDistance>();
-            DistrictShrinkerPlugin.UdateDistrictRange(instance, true);
+            DistrictManagementPlugin.UdateDistrictRange(instance, true);
         }
     }
 }

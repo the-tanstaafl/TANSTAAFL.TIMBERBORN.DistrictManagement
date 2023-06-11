@@ -94,18 +94,14 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
             var size2 = new Vector2(950, 450);
             var panel = builder._panelStack.TopPanel.VisualElement;
             panel.SetSize(size);
-            //DistrictManagementPlugin.Log.LogWarning($"Panel: {panel.name}");
             foreach (var child in panel.Children())
             {
-                //DistrictManagementPlugin.Log.LogWarning($"child: {child.name} - {child.typeName}");
                 foreach (var grandchild in child.Children())
                 {
-                    //DistrictManagementPlugin.Log.LogWarning($"grandchild: {grandchild.name} - {grandchild.typeName}");
                     grandchild.SetSize(size);
 
                     foreach (var grandgrandchild in grandchild.Children())
                     {
-                        //DistrictManagementPlugin.Log.LogWarning($"grandgrandchild: {grandgrandchild.name} - {grandgrandchild.typeName}");
                         grandgrandchild.SetSize(size2);
                     }
                 }

@@ -36,8 +36,6 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
                 IObjectLoader singleton = _singletonLoader.GetSingleton(DistrictManagementStateRestorerKey);
                 _savedConfig = singleton.Get(SavedDistrictManagementStateKey, _configSerializer);
             }
-
-            ApplyConfigs(_navigationDistance);
         }
 
         public void PostLoad()
@@ -46,6 +44,8 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
             {
                 _savedConfig = new DistrictManagementConfig(1, _navigationDistance.ResourceBuildings, _navigationDistance.DistrictTerrain);
             }
+
+            ApplyConfigs(_navigationDistance);
         }
 
         public void Save(ISingletonSaver singletonSaver)

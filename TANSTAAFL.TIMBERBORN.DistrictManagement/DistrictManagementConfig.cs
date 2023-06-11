@@ -5,7 +5,7 @@ using TimberApi.ConfigSystem;
 
 namespace TANSTAAFL.TIMBERBORN.DistrictManagement
 {
-    public class DistrictManagementConfig : IConfig
+    public class DistrictManagementConfig
     {
         public DistrictManagementConfig() { }
         public DistrictManagementConfig(int beaverArmsLength, float resourceBuildingsRange, int buildersRange) 
@@ -14,8 +14,6 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
             ResourceBuildingsRange = resourceBuildingsRange;
             BuildersRange = buildersRange;
         }
-
-        public string ConfigFileName => "DistrictManagement";
 
         public int BeaverArmsLength = 1;
         public float ResourceBuildingsRange = 20;

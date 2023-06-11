@@ -6,6 +6,7 @@ using TimberApi.ConfiguratorSystem;
 using TimberApi.EntityLinkerSystem;
 using TimberApi.SceneSystem;
 using Timberborn.Buildings;
+using Timberborn.CameraSystem;
 using Timberborn.Growing;
 using Timberborn.IrrigationSystem;
 using Timberborn.TemplateSystem;
@@ -17,7 +18,9 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.Bind<DroughtListener>().AsSingleton();
+            containerDefinition.Bind<DistrictManagement>().AsSingleton();
+            containerDefinition.Bind<DistrictManagementConfigSerializer>().AsSingleton();
+            containerDefinition.Bind<ConfigBox>().AsSingleton();
         }
     }
 }

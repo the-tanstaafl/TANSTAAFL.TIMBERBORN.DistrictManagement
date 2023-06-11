@@ -5,6 +5,7 @@ using TimberApi.UiBuilderSystem;
 using Timberborn.Core;
 using Timberborn.CoreUI;
 using Timberborn.Navigation;
+using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
 
@@ -31,13 +32,15 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
         {
             _root = _builder.CreateComponentBuilder()
                             .CreateVisualElement()
+                            .SetWidth(new Length(900, Pixel))
+                            .SetHeight(new Length(400, Pixel))
                             .AddPreset(factory => factory.Labels()
                                 .GameTextBig(name: "BeaverArmslengthLabel",
                                         text: $"Beaver Arms length: {DistrictManagement._savedConfig.BeaverArmsLength}",
                                         builder: labelBuilder => labelBuilder
                                             .SetStyle(style => style.alignSelf = Align.Center)))
                             .AddPreset(factory => factory.Sliders()
-                                .SliderIntCircle(1, 50, DistrictManagement._savedConfig.BeaverArmsLength,
+                                .SliderIntCircle(1, 100, DistrictManagement._savedConfig.BeaverArmsLength,
                                         name: "BeaverArmslengthSlider",
                                         builder: sliderBuilder => sliderBuilder
                                             .SetStyle(style => style.flexGrow = 1f)
@@ -49,7 +52,7 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
                                         builder: labelBuilder => labelBuilder
                                             .SetStyle(style => style.alignSelf = Align.Center)))
                             .AddPreset(factory => factory.Sliders()
-                                .SliderIntCircle(1, 50, (int)DistrictManagement._savedConfig.ResourceBuildingsRange,
+                                .SliderIntCircle(1, 100, (int)DistrictManagement._savedConfig.ResourceBuildingsRange,
                                         name: "ResourceBuildingsSlider",
                                         builder: sliderBuilder => sliderBuilder
                                             .SetStyle(style => style.flexGrow = 1f)
@@ -61,7 +64,7 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
                                         builder: labelBuilder => labelBuilder
                                             .SetStyle(style => style.alignSelf = Align.Center)))
                             .AddPreset(factory => factory.Sliders()
-                                .SliderIntCircle(1, 50, DistrictManagement._savedConfig.BuildersRange,
+                                .SliderIntCircle(1, 100, DistrictManagement._savedConfig.BuildersRange,
                                         name: "BuildersSlider",
                                         builder: sliderBuilder => sliderBuilder
                                             .SetStyle(style => style.flexGrow = 1f)
@@ -80,11 +83,35 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
             var buildersSlider = _root.Q<SliderInt>("BuildersSlider");
             buildersSlider.RegisterValueChangedCallback(x => buildersLabel.text = $"Builders range: {buildersSlider.value}");
 
-            _dialogBoxShower.Create()
+            var builder = _dialogBoxShower.Create()
                 .AddContent(_root)
-                .SetConfirmButton(UpdateConfigs)
-                .SetCancelButton(() => { })
-                .Show();
+                .SetConfirmButton(UpdateConfigs, "Save")
+                .SetCancelButton(() => { }, "Cancel");
+
+            builder.Show();
+
+            var size = new Vector2(1000, 500);
+            var size2 = new Vector2(950, 450);
+            var panel = builder._panelStack.TopPanel.VisualElement;
+            panel.SetSize(size);
+            //DistrictManagementPlugin.Log.LogWarning($"Panel: {panel.name}");
+            foreach (var child in panel.Children())
+            {
+                //DistrictManagementPlugin.Log.LogWarning($"child: {child.name} - {child.typeName}");
+                foreach (var grandchild in child.Children())
+                {
+                    //DistrictManagementPlugin.Log.LogWarning($"grandchild: {grandchild.name} - {grandchild.typeName}");
+                    grandchild.SetSize(size);
+
+                    foreach (var grandgrandchild in grandchild.Children())
+                    {
+                        //DistrictManagementPlugin.Log.LogWarning($"grandgrandchild: {grandgrandchild.name} - {grandgrandchild.typeName}");
+                        grandgrandchild.SetSize(size2);
+                    }
+                }
+            }
+
+            //var buttons = panel.Q("Buttons");
         }
 
         private void UpdateConfigs()

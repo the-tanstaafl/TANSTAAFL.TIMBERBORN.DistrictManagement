@@ -9,9 +9,9 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UIElements.Length.Unit;
 
-namespace TANSTAAFL.TIMBERBORN.DistrictManagement
+namespace TANSTAAFL.TIMBERBORN.DistrictManagement.Config
 {
-    public class ConfigBox
+    public class DistrictManagementConfigBox
     {
         public static Action OpenOptionsDelegate;
         private readonly DialogBoxShower _dialogBoxShower;
@@ -20,7 +20,7 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
 
         private VisualElement _root;
 
-        public ConfigBox(DialogBoxShower dialogBoxShower, UIBuilder builder, NavigationDistance navigationDistance)
+        public DistrictManagementConfigBox(DialogBoxShower dialogBoxShower, UIBuilder builder, NavigationDistance navigationDistance)
         {
             OpenOptionsDelegate = OpenOptionsPanel;
             _dialogBoxShower = dialogBoxShower;
@@ -32,15 +32,15 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
         {
             _root = _builder.CreateComponentBuilder()
                             .CreateVisualElement()
-                            .SetWidth(new Length(900, Pixel))
-                            .SetHeight(new Length(400, Pixel))
+                            //.SetWidth(new Length(900, Pixel))
+                            //.SetHeight(new Length(400, Pixel))
                             .AddPreset(factory => factory.Labels()
                                 .GameTextBig(name: "BeaverArmslengthLabel",
-                                        text: $"Beaver Arms length: {DistrictManagement._savedConfig.BeaverArmsLength}",
+                                        text: $"Beaver Arms length: {DistrictManagementConfigLoader._savedConfig.BeaverArmsLength}",
                                         builder: labelBuilder => labelBuilder
                                             .SetStyle(style => style.alignSelf = Align.Center)))
                             .AddPreset(factory => factory.Sliders()
-                                .SliderIntCircle(1, 100, DistrictManagement._savedConfig.BeaverArmsLength,
+                                .SliderIntCircle(1, 35, DistrictManagementConfigValueProvider.ObterPosicao(DistrictManagementConfigLoader._savedConfig.BeaverArmsLength),
                                         name: "BeaverArmslengthSlider",
                                         builder: sliderBuilder => sliderBuilder
                                             .SetStyle(style => style.flexGrow = 1f)
@@ -48,11 +48,11 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
 
                             .AddPreset(factory => factory.Labels()
                                 .GameTextBig(name: "ResourceBuildingsLabel",
-                                        text: $"Resource Buildings range: {DistrictManagement._savedConfig.ResourceBuildingsRange}",
+                                        text: $"Resource Buildings range: {DistrictManagementConfigLoader._savedConfig.ResourceBuildingsRange}",
                                         builder: labelBuilder => labelBuilder
                                             .SetStyle(style => style.alignSelf = Align.Center)))
                             .AddPreset(factory => factory.Sliders()
-                                .SliderIntCircle(1, 100, (int)DistrictManagement._savedConfig.ResourceBuildingsRange,
+                                .SliderIntCircle(1, 35, DistrictManagementConfigValueProvider.ObterPosicao((int)DistrictManagementConfigLoader._savedConfig.ResourceBuildingsRange),
                                         name: "ResourceBuildingsSlider",
                                         builder: sliderBuilder => sliderBuilder
                                             .SetStyle(style => style.flexGrow = 1f)
@@ -60,11 +60,11 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
 
                             .AddPreset(factory => factory.Labels()
                                 .GameTextBig(name: "BuildersLabel",
-                                        text: $"Builders range: {DistrictManagement._savedConfig.BuildersRange}",
+                                        text: $"Builders range: {DistrictManagementConfigLoader._savedConfig.BuildersRange}",
                                         builder: labelBuilder => labelBuilder
                                             .SetStyle(style => style.alignSelf = Align.Center)))
                             .AddPreset(factory => factory.Sliders()
-                                .SliderIntCircle(1, 100, DistrictManagement._savedConfig.BuildersRange,
+                                .SliderIntCircle(1, 35, DistrictManagementConfigValueProvider.ObterPosicao(DistrictManagementConfigLoader._savedConfig.BuildersRange),
                                         name: "BuildersSlider",
                                         builder: sliderBuilder => sliderBuilder
                                             .SetStyle(style => style.flexGrow = 1f)
@@ -73,15 +73,23 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
 
             var beaverLabel = _root.Q<Label>("BeaverArmslengthLabel");
             var beaverSlider = _root.Q<SliderInt>("BeaverArmslengthSlider");
-            beaverSlider.RegisterValueChangedCallback(x => beaverLabel.text = $"Beaver Arms length: {beaverSlider.value}");
+            beaverSlider.RegisterValueChangedCallback(x => beaverLabel.text = $"Beaver Arms length: {DistrictManagementConfigValueProvider.ObterValor(beaverSlider.value)}");
 
             var resourceBuildingsLabel = _root.Q<Label>("ResourceBuildingsLabel");
             var resourceBuildingsSlider = _root.Q<SliderInt>("ResourceBuildingsSlider");
-            resourceBuildingsSlider.RegisterValueChangedCallback(x => resourceBuildingsLabel.text = $"Resource Buildings range: {resourceBuildingsSlider.value}");
+            resourceBuildingsSlider.RegisterValueChangedCallback(x => resourceBuildingsLabel.text = $"Resource Buildings range: {DistrictManagementConfigValueProvider.ObterValor(resourceBuildingsSlider.value)}");
 
             var buildersLabel = _root.Q<Label>("BuildersLabel");
             var buildersSlider = _root.Q<SliderInt>("BuildersSlider");
-            buildersSlider.RegisterValueChangedCallback(x => buildersLabel.text = $"Builders range: {buildersSlider.value}");
+            buildersSlider.RegisterValueChangedCallback(x => buildersLabel.text = $"Builders range: {DistrictManagementConfigValueProvider.ObterValor(buildersSlider.value)}");
+
+
+            _builder.CreateBoxBuilder()
+                .SetHeight(new Length(400, Pixel))
+                .SetWidth(new Length(900, Pixel))
+                .SetBoxInCenter()
+                .AddComponent(_root);
+
 
             var builder = _dialogBoxShower.Create()
                 .AddContent(_root)
@@ -90,33 +98,31 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
 
             builder.Show();
 
-            var size = new Vector2(1000, 500);
-            var size2 = new Vector2(950, 450);
-            var panel = builder._panelStack.TopPanel.VisualElement;
-            panel.SetSize(size);
-            foreach (var child in panel.Children())
-            {
-                foreach (var grandchild in child.Children())
-                {
-                    grandchild.SetSize(size);
+            //var size = new Vector2(1000, 500);
+            //var size2 = new Vector2(950, 450);
+            //var panel = builder._panelStack.TopPanel.VisualElement;
+            //panel.SetSize(size);
+            //foreach (var child in panel.Children())
+            //{
+            //    foreach (var grandchild in child.Children())
+            //    {
+            //        grandchild.SetSize(size);
 
-                    foreach (var grandgrandchild in grandchild.Children())
-                    {
-                        grandgrandchild.SetSize(size2);
-                    }
-                }
-            }
-
-            //var buttons = panel.Q("Buttons");
+            //        foreach (var grandgrandchild in grandchild.Children())
+            //        {
+            //            grandgrandchild.SetSize(size2);
+            //        }
+            //    }
+            //}
         }
 
         private void UpdateConfigs()
         {
-            DistrictManagement._savedConfig.BeaverArmsLength = _root.Q<SliderInt>("BeaverArmslengthSlider").value;
-            DistrictManagement._savedConfig.ResourceBuildingsRange = _root.Q<SliderInt>("ResourceBuildingsSlider").value;
-            DistrictManagement._savedConfig.BuildersRange = _root.Q<SliderInt>("BuildersSlider").value;
+            DistrictManagementConfigLoader._savedConfig.BeaverArmsLength = DistrictManagementConfigValueProvider.ObterValor(_root.Q<SliderInt>("BeaverArmslengthSlider").value);
+            DistrictManagementConfigLoader._savedConfig.ResourceBuildingsRange = DistrictManagementConfigValueProvider.ObterValor(_root.Q<SliderInt>("ResourceBuildingsSlider").value);
+            DistrictManagementConfigLoader._savedConfig.BuildersRange = DistrictManagementConfigValueProvider.ObterValor(_root.Q<SliderInt>("BuildersSlider").value);
 
-            DistrictManagement.ApplyConfigs(_navigationDistance);
+            DistrictManagementConfigLoader.ApplyConfigs(_navigationDistance);
         }
     }
 }

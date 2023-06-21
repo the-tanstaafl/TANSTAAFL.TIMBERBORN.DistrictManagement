@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TANSTAAFL.TIMBERBORN.DistrictManagement.Config;
 using TimberApi.ConfiguratorSystem;
 using TimberApi.EntityLinkerSystem;
 using TimberApi.SceneSystem;
@@ -18,9 +19,9 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
     {
         public void Configure(IContainerDefinition containerDefinition)
         {
-            containerDefinition.Bind<DistrictManagement>().AsSingleton();
+            containerDefinition.Bind<DistrictManagementConfigLoader>().AsSingleton();
             containerDefinition.Bind<DistrictManagementConfigSerializer>().AsSingleton();
-            containerDefinition.Bind<ConfigBox>().AsSingleton();
+            containerDefinition.Bind<DistrictManagementConfigBox>().AsSingleton();
         }
     }
 }

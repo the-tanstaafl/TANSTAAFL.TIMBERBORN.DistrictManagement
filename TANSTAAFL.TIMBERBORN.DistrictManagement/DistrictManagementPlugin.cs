@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using TANSTAAFL.TIMBERBORN.DistrictManagement.Config;
 using TimberApi.Common.Extensions;
 using TimberApi.ConsoleSystem;
 using TimberApi.ModSystem;
@@ -48,7 +49,7 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
         [HarmonyPatch(typeof(ConstructionSiteAccessible), nameof(ConstructionSiteAccessible.MinZ), MethodType.Getter)]
         public static bool Prefix(ConstructionSiteAccessible __instance, ref int __result)
         {
-            __result = __instance._blockObject.CoordinatesAtBaseZ.z - (DistrictManagement._savedConfig?.BeaverArmsLength??1);
+            __result = __instance._blockObject.CoordinatesAtBaseZ.z - (DistrictManagementConfigLoader._savedConfig?.BeaverArmsLength??1);
             return false;
         }
 
@@ -60,7 +61,7 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
             Button button = new() { classList = { "menu-button" } };
 
             button.text = "DistrictManagement config";
-            button.clicked += ConfigBox.OpenOptionsDelegate;
+            button.clicked += DistrictManagementConfigBox.OpenOptionsDelegate;
             root.Insert(4, button);
         }
     }

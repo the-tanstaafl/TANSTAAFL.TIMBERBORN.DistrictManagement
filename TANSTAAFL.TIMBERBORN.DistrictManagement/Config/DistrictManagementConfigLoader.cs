@@ -8,20 +8,20 @@ using Timberborn.Navigation;
 using Timberborn.Persistence;
 using Timberborn.SingletonSystem;
 
-namespace TANSTAAFL.TIMBERBORN.DistrictManagement
+namespace TANSTAAFL.TIMBERBORN.DistrictManagement.Config
 {
-    public class DistrictManagement : ISaveableSingleton, ILoadableSingleton, IPostLoadableSingleton
+    public class DistrictManagementConfigLoader : ISaveableSingleton, ILoadableSingleton, IPostLoadableSingleton
     {
-	    private static readonly SingletonKey DistrictManagementStateRestorerKey = new SingletonKey("DistrictManagementStateRestorer");
+        private static readonly SingletonKey DistrictManagementStateRestorerKey = new SingletonKey("DistrictManagementStateRestorer");
         private static readonly PropertyKey<DistrictManagementConfig> SavedDistrictManagementStateKey = new PropertyKey<DistrictManagementConfig>("DistrictManagementState");
-        
+
         private NavigationDistance _navigationDistance;
         internal static DistrictManagementConfig _savedConfig;
         private DistrictManagementConfigSerializer _configSerializer;
 
         private readonly ISingletonLoader _singletonLoader;
 
-        public DistrictManagement(NavigationDistance navigationDistance, ISingletonLoader singletonLoader, DistrictManagementConfigSerializer configSerializer)
+        public DistrictManagementConfigLoader(NavigationDistance navigationDistance, ISingletonLoader singletonLoader, DistrictManagementConfigSerializer configSerializer)
         {
             _navigationDistance = navigationDistance;
             _singletonLoader = singletonLoader;

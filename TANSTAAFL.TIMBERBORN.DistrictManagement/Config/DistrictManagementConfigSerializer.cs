@@ -4,7 +4,7 @@ using System.Text;
 using Timberborn.CameraSystem;
 using Timberborn.Persistence;
 
-namespace TANSTAAFL.TIMBERBORN.DistrictManagement
+namespace TANSTAAFL.TIMBERBORN.DistrictManagement.Config
 {
     public class DistrictManagementConfigSerializer : IObjectSerializer<DistrictManagementConfig>
     {
@@ -18,6 +18,7 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
             objectSaver.Set(ResourceBuildingsRangeKey, value.ResourceBuildingsRange);
             objectSaver.Set(BuildersRangeKey, value.BuildersRange);
         }
+
         public Obsoletable<DistrictManagementConfig> Deserialize(IObjectLoader objectLoader)
         {
             return new DistrictManagementConfig(objectLoader.Get(BeaverArmsLengthKey), objectLoader.Get(ResourceBuildingsRangeKey), objectLoader.Get(BuildersRangeKey));

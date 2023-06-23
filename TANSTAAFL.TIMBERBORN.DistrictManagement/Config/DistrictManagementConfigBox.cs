@@ -32,8 +32,6 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement.Config
         {
             _root = _builder.CreateComponentBuilder()
                             .CreateVisualElement()
-                            //.SetWidth(new Length(900, Pixel))
-                            //.SetHeight(new Length(400, Pixel))
                             .AddPreset(factory => factory.Labels()
                                 .GameTextBig(name: "BeaverArmslengthLabel",
                                         text: $"Beaver Arms length: {DistrictManagementConfigLoader._savedConfig.BeaverArmsLength}",
@@ -97,23 +95,6 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement.Config
                 .SetCancelButton(() => { }, "Cancel");
 
             builder.Show();
-
-            //var size = new Vector2(1000, 500);
-            //var size2 = new Vector2(950, 450);
-            //var panel = builder._panelStack.TopPanel.VisualElement;
-            //panel.SetSize(size);
-            //foreach (var child in panel.Children())
-            //{
-            //    foreach (var grandchild in child.Children())
-            //    {
-            //        grandchild.SetSize(size);
-
-            //        foreach (var grandgrandchild in grandchild.Children())
-            //        {
-            //            grandgrandchild.SetSize(size2);
-            //        }
-            //    }
-            //}
         }
 
         private void UpdateConfigs()

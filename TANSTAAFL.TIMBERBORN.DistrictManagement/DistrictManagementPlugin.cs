@@ -1,34 +1,13 @@
 ﻿using HarmonyLib;
-using Mono.Cecil;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using TANSTAAFL.TIMBERBORN.DistrictManagement.Config;
-using TimberApi.Common.Extensions;
 using TimberApi.ConsoleSystem;
 using TimberApi.ModSystem;
 using Timberborn.BuildingsNavigation;
-using Timberborn.CoreUI;
-using Timberborn.EditorStarter;
-using Timberborn.EntitySystem;
-using Timberborn.Growing;
-using Timberborn.IrrigationSystem;
-using Timberborn.MapIndexSystem;
-using Timberborn.NaturalResourcesModelSystem;
-using Timberborn.NaturalResourcesReproduction;
-using Timberborn.Navigation;
-using Timberborn.Options;
-using Timberborn.Persistence;
-using Timberborn.SoilMoistureSystem;
-using Timberborn.TickSystem;
-using Timberborn.WaterSystem;
-using Timberborn.WeatherSystem;
-using UnityEngine;
-using UnityEngine.Bindings;
+using Timberborn.OptionsGame;
 using UnityEngine.UIElements;
 
 namespace TANSTAAFL.TIMBERBORN.DistrictManagement
@@ -54,10 +33,10 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
         }
 
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(OptionsBox), "GetPanel")]
+        [HarmonyPatch(typeof(GameOptionsBox), "GetPanel")]
         static void ShowConfigBox(ref VisualElement __result)
         {
-            VisualElement root = __result.Query("OptionsBox");
+            VisualElement root = __result.Query("Game/GameOptionsBox");
             Button button = new() { classList = { "menu-button" } };
 
             button.text = "DistrictManagement config";

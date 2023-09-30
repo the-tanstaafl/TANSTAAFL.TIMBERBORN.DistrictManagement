@@ -36,7 +36,7 @@ namespace TANSTAAFL.TIMBERBORN.DistrictManagement
         [HarmonyPatch(typeof(GameOptionsBox), "GetPanel")]
         static void ShowConfigBox(ref VisualElement __result)
         {
-            VisualElement root = __result.Query("Game/GameOptionsBox");
+            VisualElement root = __result.Query("OptionsBox");
             Button button = new() { classList = { "menu-button" } };
 
             button.text = "DistrictManagement config";
